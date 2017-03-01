@@ -65,7 +65,21 @@ As a librarian, I want to see a list of overdue books, so that I can call up the
 * MIT
 
 ## Implementation Plan
-To Do.
 
+* Construct a README.md
+* Build and test Class (Book)
+* Implementation of Silex framework
+* Implementation of basic Book routes with Twig
+* Build and test Class (Author)  
+* Implementation of basic Author routes with Twig
+* Build and test AuthorBook Class
+* Build twig routes for AuthorBook
+* Build and test Patron class
+* Implement basic routes with Twig
+* Build and test BookCopy class
+* Implement routes with Twig
+* Build and test CheckOut class
+* Implement routes with Twig
+* 
 
 * End specifications
