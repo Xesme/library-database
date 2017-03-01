@@ -3,7 +3,7 @@
     {
         private $id;
         private $title;
-        private $publising;
+        private $publishing;
         private $synopsis;
         private $genre_id;
 
@@ -28,17 +28,17 @@
 
         function getTitle()
         {
-            return $this->name;
+            return $this->title;
         }
 
         function getPublishing()
         {
-            return $this->contact_info;
+            return $this->publishing;
         }
 
         function getSynopsis()
         {
-            return $this->stylist_id;
+            return $this->synopsis;
         }
 
         function setId($id)
@@ -53,17 +53,17 @@
 
         function setTitle($title)
         {
-            $this->name = (string) $title;
+            $this->title = (string) $title;
         }
 
         function setPublishing($publishing)
         {
-            $this->contact_info = (string) $publishing;
+            $this->publishing = (string) $publishing;
         }
 
         function setSynopsis($synopsis)
         {
-            $this->stylist_id = (int) $synopsis;
+            $this->synopsis = (string) $synopsis;
         }
 
         function save()
@@ -73,7 +73,7 @@
 
             $GLOBALS['DB']->exec("INSERT INTO Books
                 (title, publishing, synopsis, genre_id) VALUES
-                ('$title', '{$this->getPublishing()}', '$synposis', {$this->getGenreId()});"
+                ('$title', '{$this->getPublishing()}', '$synopsis', {$this->getGenreId()});"
             );
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
@@ -124,14 +124,14 @@
         function update($title, $publishing, $synopsis)
         {
             $this->setTitle(addslashes($title));
-            $this->setPublishing($publising);
+            $this->setPublishing($publishing);
             $this->setSynopsis(addslashes($synopsis));
 
             $GLOBALS['DB']->exec(
                 "UPDATE books SET
                     title = '{$this->getTitle()}',
                     publishing = '{$this->getPublishing()}',
-                    synopsis = {$this->getSynopsis()},
+                    synopsis = '{$this->getSynopsis()}',
                     genre_id = {$this->getGenreId()}
                 WHERE id = {$this->getId()};"
             );
