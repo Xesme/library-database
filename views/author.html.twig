@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block page %}
+<div class='row'>
+    <div class='col-md-6'>
+        <h3>Find Authors</h3>
+        <form action='/get/authors' method='get'>
+            <div class='form-group'>
+                <label for='author_name'>Author's name:</label>
+                <input name='author_name' class='form-control' type='text'>
+            </div>
+
+            <button type='submit' class='btn btn-primary'>Find Authors</button>
+        </form>
+        <br>
+        <br>
+        <h3> Add an Author to the library</h3>
+        <form action='/post/author' method="post">
+            <div class='form-group'>
+                <label for='author_name'>Name of Author</label>
+                <input name='author_name' class='form-control' type='text'>
+            </div>
+
+            <button type='submit' class='btn btn-primary'>Add Author</button>
+        </form>
+    </div> <!-- End Col -->
+
+    <div class='col-md-6'>
+
+    </div> <!-- End Col -->
+</div> <!-- End Row -->
+{% endblock %}

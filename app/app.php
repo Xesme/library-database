@@ -21,10 +21,7 @@
     // Book routes
 
     $app->get("/", function() use ($app) {
-        return 'hello library';
-        // return $app['twig']->render('stylists.html.twig',
-        //     array('edit_stylist' => new Stylist, 'stylists' => Stylist::getAll())
-        // );
+        return $app['twig']->render('book_search.html.twig');
     });
 
     $app->post("/post/book", function() use ($app) {
@@ -75,6 +72,37 @@
         // return $app['twig']->render('stylists.html.twig',
         //     array('edit_stylist' => new Stylist, 'stylists' => Stylist::getAll())
         // );
+    });
+
+    // CRUD for Author
+
+    $app->get("/get/authors", function() use ($app) {
+        return $app['twig']->render('author.html.twig');
+    });
+
+    $app->post("/post/author", function() use ($app) {
+        return 'To do';
+
+    });
+
+    $app->get("/get/author/{id}/edit", function($id) use ($app) {
+        return 'To do';
+
+    });
+
+    $app->patch("/patch/author/{id}", function($id) use ($app) {
+        return 'To do';
+
+    });
+
+    $app->delete("/delete/author/{id}", function($id) use ($app) {
+        return 'To do';
+
+    });
+
+    $app->delete("/delete/authors", function() use ($app) {
+        return 'To do';
+
     });
 
 

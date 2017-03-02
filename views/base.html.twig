@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    <title>Library</title>
+</head>
+<body>
+    <div class='container'>
+        {% block header %}
+            <h2><a href='/'>Welcome to the Library</a></h2>
+            <br>
+            <bt>
+        {% endblock %}
+
+        {% block page %}
+        {% endblock %}
+
+        {% block footer %}
+            <br>
+            <br>
+            <bt>
+            <footer>Created by <a href="https://github.com/bseaver">Benjamin T. Seaver</a> and <a href="https://github.com/xesme">Xia Amen.</a></footer>
+        {% endblock %}
+    </div>
+</body>
+</html>
