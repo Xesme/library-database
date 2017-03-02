@@ -77,9 +77,20 @@
     // CRUD for Author
 
     $app->get("/get/authors", function() use ($app) {
+        $search_expression = '';
+        if (array_key_exists('author_name', $_GET)) {
+            $search_expression = $_GET['author_name'];
+            if (!strpos($search_expression, '%')) {
+                $search_expression = '%' . $search_expression . '%';
+            }
+            $found_authors = Author::getAll($search_expression);
+        } else {
+            $found_authors = Author::getAll();
+        }
+
         return $app['twig']->render(
             'author.html.twig',
-            array('authors' => Author::getAll(), 'edit_author' => New Author)
+            array('authors' => $found_authors, 'edit_author' => New Author, 'search_expression' => $search_expression)
         );
     });
 
@@ -87,7 +98,7 @@
         $author = new Author($_POST['author_name']);
         $author->save();
         return $app['twig']->render('author.html.twig',
-            array('authors' => [$author])
+            array('authors' => [$author], 'edit_author' => New Author)
         );
     });
 

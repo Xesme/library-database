@@ -43,10 +43,14 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
-        static function getAll()
+        static function getAll($search_expression = '')
         {
+            if ($search_expression) {
+                $query = "SELECT * FROM authors WHERE author_name LIKE '$search_expression' ORDER BY author_name;";
+            } else {
+                $query = "SELECT * FROM authors ORDER BY author_name;";
+            }
 
-            $query = "SELECT * FROM authors ORDER BY author_name;";
 
             $output = array();
             $results = $GLOBALS['DB']->query($query);

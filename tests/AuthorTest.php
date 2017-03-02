@@ -68,6 +68,24 @@ class AuthorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals([$author1, $author3, $author2], $all_authors);
     }
 
+    function test_Author_getAll_with_search_expression()
+    {
+        // Arrange
+        $author1 = new Author('Charles Dickenson');
+        $author2 = new Author('Oliver Wolf Sacks');
+        $author3 = new Author('Mary Shelly');
+
+
+        // Act
+        $author1->save();
+        $author2->save();
+        $author3->save();
+        $searched_authors = Author::getAll('%wolf%');
+
+        // Assert
+        $this->assertEquals([$author2], $searched_authors);
+    }
+
     function test_Author_findById()
     {
         // Arrange
