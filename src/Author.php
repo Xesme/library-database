@@ -28,7 +28,7 @@
 
         function setAuthorName($author_name)
         {
-            $this->author = (string) $author_name;
+            $this->author_name = (string) $author_name;
         }
         // CRUD functions
 
@@ -37,7 +37,7 @@
             $author_name = addslashes($this->getAuthorName());
 
             $GLOBALS['DB']->exec("INSERT INTO authors
-                (author) VALUES
+                (author_name) VALUES
                 ('$author_name');"
             );
             $this->id = $GLOBALS['DB']->lastInsertId();
@@ -83,7 +83,7 @@
 
             $GLOBALS['DB']->exec(
                 "UPDATE authors SET
-                    author_name = '{$this->getAuthorName()}',
+                    author_name = '{$this->getAuthorName()}'
                 WHERE id = {$this->getId()};"
             );
         }

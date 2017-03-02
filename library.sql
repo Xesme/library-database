@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: Mar 02, 2017 at 07:08 PM
+-- Generation Time: Mar 02, 2017 at 07:38 PM
 -- Server version: 5.5.42
 -- PHP Version: 5.6.10
 
@@ -30,7 +30,7 @@ USE `library`;
 
 DROP TABLE IF EXISTS `authors`;
 CREATE TABLE `authors` (
-  `$id` bigint(20) unsigned NOT NULL,
+  `id` bigint(20) unsigned NOT NULL,
   `author_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -77,8 +77,8 @@ INSERT INTO `genre` (`id`, `genre_name`) VALUES
 -- Indexes for table `authors`
 --
 ALTER TABLE `authors`
-  ADD PRIMARY KEY (`$id`),
-  ADD UNIQUE KEY `$id` (`$id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `$id` (`id`);
 
 --
 -- Indexes for table `books`
@@ -102,7 +102,7 @@ ALTER TABLE `genre`
 -- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `$id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `books`
 --
