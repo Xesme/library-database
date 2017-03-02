@@ -14,19 +14,66 @@
         </form>
         <br>
         <br>
-        <h3> Add an Author to the library</h3>
-        <form action='/post/author' method="post">
-            <div class='form-group'>
-                <label for='author_name'>Name of Author</label>
-                <input name='author_name' class='form-control' type='text'>
-            </div>
+        {% if edit_author.getId %}
+            <h3> Edit Author</h3>
+            <form action='/patch/author' method="post">
+                <div class='form-group'>
+                    <label for='author_name'>Name of Author</label>
+                    <input name='_method' value='patch' hidden>
+                    <input name='id' value='{{ edit_author.getId }}' hidden>
+                    <input name='author_name' class='form-control' type='text'
+                        value='{{ edit_author.getAuthorName }}'
+                    >
+                </div>
 
-            <button type='submit' class='btn btn-primary'>Add Author</button>
-        </form>
+                <button type='submit' class='btn btn-primary'>Add Author</button>
+            </form>
+        {% else %}
+            <h3> Add an Author to the library</h3>
+            <form action='/post/author' method="post">
+                <div class='form-group'>
+                    <label for='author_name'>Name of Author</label>
+                    <input name='author_name' class='form-control' type='text'>
+                </div>
+
+                <button type='submit' class='btn btn-primary'>Add Author</button>
+            </form>
+        {% endif %}
     </div> <!-- End Col -->
 
     <div class='col-md-6'>
+        <table class="table table-striped">
+            <thead>
+                <th>Author's Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </thead>
 
+            <tbody>
+                {% for author in authors %}
+                    <tr>
+                        <td>{{ author.getAuthorName }}</td>
+                        <td>
+                            <form action='/get/author/{{ author.getId }}/edit' method='get'>
+                                <button type='submit' class='btn btn-xs btn-info'>Edit</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action='/delete/author/{{ author.getId }}' method='post'>
+                                <input name='_method' value='delete' hidden>
+                                <button type='submit' class='btn btn-xs btn-warning'
+                                {% if edit_author.getId %}
+                                    disabled
+                                {% endif %}
+                                >
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div> <!-- End Col -->
 </div> <!-- End Row -->
 {% endblock %}
