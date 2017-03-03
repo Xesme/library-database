@@ -24,15 +24,54 @@
         return $app['twig']->render('book_search.html.twig');
     });
 
-    $app->post("/post/book", function() use ($app) {
-        return 'To do';
+    $app->get("/get/book/edit", function() use ($app) {
+        $search_author = '%Em%';
+        $found_authors = Author::getAll($search_author);
+        $book_authors = array(Author::findById(2));
 
-        // $stylist = new Stylist($_POST['stylist_name'], $_POST['stylist_contact_info']);
-        // $stylist->save();
-        //
-        // return $app['twig']->render('stylists.html.twig',
-        //     array('edit_stylist' => new Stylist, 'stylists' => Stylist::getAll())
-        // );
+        return $app['twig']->render(
+            'book_edit.html.twig',
+            array('search_author' => $search_author,
+                'found_authors' => $found_authors,
+                'book_authors' => $book_authors
+            )
+        );
+
+    });
+
+    $app->post("/post/book", function() use ($app) {
+        $search_author = $_POST['search_author'];
+        $found_authors = array();
+        $book_authors = array();
+
+        $book_author_index = 0;
+        while (array_key_exists('book_author_' . $book_author_index, $_POST)) {
+            array_push(
+                $book_authors,
+                Author::findById($_POST['book_author_' . $book_author_index])
+            );
+            $book_author_index++;
+        }
+
+        if (array_key_exists('find_authors_button', $_POST)) {
+            if (!strpos($search_author, '%')) {
+                $search_author = '%' . $search_author . '%';
+            }
+            $found_authors = Author::getAll($search_author);
+        }
+
+        if (array_key_exists('add_author_to_book', $_POST)) {
+            array_push($book_authors, Author::findById($_POST['add_author_to_book']));
+        }
+
+        return $app['twig']->render(
+            'book_edit.html.twig',
+            array('search_author' => $search_author,
+                'found_authors' => $found_authors,
+                'book_authors' => $book_authors
+            )
+        );
+
     });
 
     $app->get("/get/book/{id}/edit", function($id) use ($app) {

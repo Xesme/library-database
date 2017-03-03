@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block page %}
+<form action='/post/book' method='post'>
+    <div class='row'>
+        <div class='col-md-6'>
+            <h3>Find Authors For Book</h3>
+            <div class='form-group'>
+                <label for='search_author'>Author's name:</label>
+                <input name='search_author' class='form-control' type='text'
+                    value='{{ search_author|default('') }}'
+                >
+            </div>
+
+            <button type='submit' class='btn btn-primary' name='find_authors_button'>Find Authors</button>
+
+        </div> <!-- End Col -->
+
+        <div class='col-md-6'>
+            {% if found_authors is not empty %}
+                <h3>Found Authors For Book</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <th>Author's Name</th>
+                        <th>Add to Book</th>
+                    </thead>
+
+                    <tbody>
+                        {% for author in found_authors %}
+                            <tr>
+                                <td>{{ author.getAuthorName }}</td>
+                                <td>
+                                    <button type='submit' class='btn btn-xs btn-info'
+                                        name='add_author_to_book'
+                                        value='{{ author.getId }}'
+                                    >
+                                        Add Author
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+
+            <h3>Authors of Book</h3>
+            {% if book_authors is not empty %}
+                <table class="table table-striped">
+                    <thead>
+                        <th>Author's Name</th>
+                        <th>Add to Book</th>
+                    </thead>
+
+                    <tbody>
+                        {% for author in book_authors %}
+                            <tr>
+                                <td>
+                                    {{ author.getAuthorName }}
+                                    <input
+                                        name='book_author_{{ loop.index0 }}'
+                                        value='{{ author.getId }}'
+                                        hidden
+                                    >
+                                </td>
+                                <td>
+                                    <button type='submit' class='btn btn-xs btn-info'
+                                        name='add_author_to_book'
+                                        value='{{ author.getId }}'
+                                    >
+                                        Add Author
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>(Please find and add an author for the book)</p>
+            {% endif %}
+        </div> <!-- End Col -->
+    </div> <!-- End Row -->
+</form>
+{% endblock %}
