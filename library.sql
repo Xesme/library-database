@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: Mar 02, 2017 at 07:38 PM
+-- Generation Time: Mar 03, 2017 at 01:45 AM
 -- Server version: 5.5.42
 -- PHP Version: 5.6.10
 
@@ -32,6 +32,29 @@ DROP TABLE IF EXISTS `authors`;
 CREATE TABLE `authors` (
   `id` bigint(20) unsigned NOT NULL,
   `author_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `authors`
+--
+
+INSERT INTO `authors` (`id`, `author_name`) VALUES
+(2, 'Emily E. Dickenson'),
+(4, 'James Joyce'),
+(5, 'Emile Jarvis'),
+(6, 'Oliver Wolf Sacks');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `authors_books`
+--
+
+DROP TABLE IF EXISTS `authors_books`;
+CREATE TABLE `authors_books` (
+  `id` bigint(20) unsigned NOT NULL,
+  `author_id` bigint(20) DEFAULT NULL,
+  `book_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -81,6 +104,13 @@ ALTER TABLE `authors`
   ADD UNIQUE KEY `$id` (`id`);
 
 --
+-- Indexes for table `authors_books`
+--
+ALTER TABLE `authors_books`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
 -- Indexes for table `books`
 --
 ALTER TABLE `books`
@@ -102,6 +132,11 @@ ALTER TABLE `genre`
 -- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `authors_books`
+--
+ALTER TABLE `authors_books`
   MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `books`
