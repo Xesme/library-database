@@ -43,18 +43,27 @@
         $search_author = $_POST['search_author'];
         $found_authors = array();
         $book_authors = array();
+        $remove_author_from_book_id = '';
+
+        if (array_key_exists('remove_author_from_book_button', $_POST)) {
+            $remove_author_from_book_id = $_POST['remove_author_from_book_button'];
+        }
 
         $book_author_index = 0;
         while (array_key_exists('book_author_' . $book_author_index, $_POST)) {
-            array_push(
-                $book_authors,
-                Author::findById($_POST['book_author_' . $book_author_index])
-            );
+            $next_author_id = $_POST['book_author_' . $book_author_index];
+
+            if ($next_author_id != $remove_author_from_book_id) {
+                array_push(
+                    $book_authors,
+                    Author::findById($next_author_id)
+                );
+            }
             $book_author_index++;
         }
 
         if (array_key_exists('find_authors_button', $_POST)) {
-            if (!strpos($search_author, '%')) {
+            if (gettype(strpos($search_author, '%')) == 'boolean') {
                 $search_author = '%' . $search_author . '%';
             }
             $found_authors = Author::getAll($search_author);
